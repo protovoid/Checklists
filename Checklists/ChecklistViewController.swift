@@ -37,18 +37,20 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
   
   
   var items = [ChecklistItem]()
+  var checklist: Checklist!
   
   
 
   
   
 
-  // MARK: override functions
+  // MARK: - override functions
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // enable large titles
-    navigationController?.navigationBar.prefersLargeTitles = true
+    // disable large titles
+    navigationItem.largeTitleDisplayMode = .never
+    title = checklist.name
     // load data
     loadChecklistItems()
   }
@@ -104,7 +106,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     }
   }
   
-  // MARK: functions
+  // MARK: - functions
     
   func configureCheckmark(for cell: UITableViewCell, with item: ChecklistItem) {
     let label = cell.viewWithTag(1001) as! UILabel
@@ -121,7 +123,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     label.text = item.text
   }
   
-  // MARK: saved data functions
+  // MARK: - saved data functions
   
   func documentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
