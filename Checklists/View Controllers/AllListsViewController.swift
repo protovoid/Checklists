@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate {
+class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate, UINavigationControllerDelegate {
   
   // var lists = [Checklist]()
   var dataModel: DataModel!
@@ -18,6 +18,19 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
       // enable large titles
       navigationController?.navigationBar.prefersLargeTitles = true
     }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    navigationController?.delegate = self
+    
+    // if back button was not pressed, segue to previously active checklist
+    let index = dataModel.indexOfSelectedChecklist
+    if index >= 0 && index < dataModel.lists.count {
+      let checklist = dataModel.lists[index]
+      performSegue(withIdentifier: "ShowChecklist", sender: checklist)
+    }
+  }
   
 
     override func didReceiveMemoryWarning() {
@@ -41,6 +54,8 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    dataModel.indexOfSelectedChecklist = indexPath.row
+    
     let checklist = dataModel.lists[indexPath.row]
     performSegue(withIdentifier: "ShowChecklist", sender: checklist)
   }
@@ -107,6 +122,13 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     controller.checklistToEdit = checklist
     
     navigationController?.pushViewController(controller, animated: true)
+  }
+  
+  func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    // was back button tapped?
+    if viewController === self {
+      dataModel.indexOfSelectedChecklist = -1
+    }
   }
 
   
