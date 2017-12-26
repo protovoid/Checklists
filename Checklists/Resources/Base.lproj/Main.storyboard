@@ -132,16 +132,17 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MQL-Pm-kB5">
-                                                    <rect key="frame" x="308" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="308" y="4" width="51" height="35.5"/>
                                                     <connections>
                                                         <action selector="shouldRemindToggled:" destination="bFR-3C-iZ1" eventType="valueChanged" id="YJ8-n9-vKK"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="MQL-Pm-kB5" firstAttribute="centerY" secondItem="e6d-Uc-IfC" secondAttribute="centerY" id="2jI-RZ-dcF"/>
                                                 <constraint firstItem="3DD-MJ-epS" firstAttribute="top" secondItem="e6d-Uc-IfC" secondAttribute="top" constant="8" id="AHJ-qd-uKl"/>
                                                 <constraint firstItem="3DD-MJ-epS" firstAttribute="centerY" secondItem="e6d-Uc-IfC" secondAttribute="centerY" id="EQV-Cs-Dru"/>
-                                                <constraint firstItem="MQL-Pm-kB5" firstAttribute="top" secondItem="e6d-Uc-IfC" secondAttribute="top" constant="6" id="HrQ-EM-U5s"/>
+                                                <constraint firstItem="MQL-Pm-kB5" firstAttribute="top" secondItem="e6d-Uc-IfC" secondAttribute="top" constant="4" id="HrQ-EM-U5s"/>
                                                 <constraint firstItem="MQL-Pm-kB5" firstAttribute="leading" secondItem="3DD-MJ-epS" secondAttribute="trailing" constant="16" id="OvO-Bn-IRh"/>
                                                 <constraint firstAttribute="trailing" secondItem="MQL-Pm-kB5" secondAttribute="trailing" constant="18" id="UCp-3g-uf8"/>
                                                 <constraint firstItem="3DD-MJ-epS" firstAttribute="leading" secondItem="e6d-Uc-IfC" secondAttribute="leading" constant="16" id="ovb-ST-vgb"/>

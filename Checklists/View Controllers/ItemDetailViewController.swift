@@ -33,11 +33,6 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
   
   
   
-  
-  
-  
-  
-  
   @IBAction func cancel() {
     delegate?.itemDetailViewControllerDidCancel(self)
   }
@@ -76,7 +71,6 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
       }
     }
   }
-  
   
   
   weak var delegate: AddItemViewControllerDelegate?
@@ -210,12 +204,4 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
   func textFieldDidBeginEditing(_ textField: UITextField) {
     hideDatePicker()
   }
-  
-  
-
-
-
- 
-
-
 }

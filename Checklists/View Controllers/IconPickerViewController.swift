@@ -38,8 +38,6 @@ class IconPickerViewController: UITableViewController {
       delegate.iconPicker(self, didPick: iconName)
     }
   }
-  
-  
 }
 
 

@@ -51,9 +51,6 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate, Icon
   }
   
   @IBAction func done() {
-    // let checklist = Checklist(name: textField.text!, iconName: iconName)
-    
-    
     if let checklist = checklistToEdit {
       checklist.name = textField.text!
       checklist.iconName = iconName
@@ -62,7 +59,6 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate, Icon
       let checklist = Checklist(name: textField.text!, iconName: iconName)
       delegate?.listDetailViewController(self, didFinishAdding: checklist)
     }
-    
   }
   
   // MARK: - TableView Delegates
@@ -99,11 +95,4 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate, Icon
       controller.delegate = self
     }
   }
-  
-  
-  
-  
-  
-  
-  
 }
