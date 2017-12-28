@@ -29,11 +29,12 @@ class ChecklistItem: NSObject, Codable {
   
   func toggleChecked() {
     checked = !checked
+    scheduleNotification()
   }
   
   func scheduleNotification() {
     removeNotification()
-    if shouldRemind && dueDate > Date() {
+    if !checked && shouldRemind && dueDate > Date() {
       let content = UNMutableNotificationContent()
       content.title = "Reminder:"
       content.body = text
