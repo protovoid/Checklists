@@ -38,13 +38,14 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
   }
   
   @IBAction func done() {
-    if let itemToEdit = itemToEdit {
+    if let itemToEdit = itemToEdit { // edit existing item
       itemToEdit.text = textField.text!
       itemToEdit.shouldRemind = shouldRemindSwitch.isOn
       itemToEdit.dueDate = dueDate
       itemToEdit.scheduleNotification()
       delegate?.itemDetailViewController(self, didFinishEditing: itemToEdit)
-    } else {
+      print("(from itemToEdit) DUE DATE SET TO \(dueDate)")
+    } else { // create new item
       let item = ChecklistItem()
       item.text = textField.text!
       item.checked = false
@@ -52,6 +53,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
       item.dueDate = dueDate
       item.scheduleNotification()
       delegate?.itemDetailViewController(self, didFinishAdding: item)
+      print("(from item) DUE DATE SET TO \(dueDate)")
     }
   }
   

@@ -21,7 +21,6 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     let indexPaths = [indexPath]
     tableView.insertRows(at: indexPaths, with: .automatic)
     navigationController?.popViewController(animated: true)
-    // saveChecklistItems()
   }
   
   func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: ChecklistItem) {
@@ -29,14 +28,13 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
       let indexPath = IndexPath(row: index, section: 0)
       if let cell = tableView.cellForRow(at: indexPath) {
         configureText(for: cell, with: item)
+        configureDueDate(for: cell, with: item)
       }
     }
     navigationController?.popViewController(animated: true)
-    // saveChecklistItems()
   }
   
   
-  // var items = [ChecklistItem]()
   var checklist: Checklist!
   
   
@@ -49,8 +47,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     // disable large titles
     navigationItem.largeTitleDisplayMode = .never
     title = checklist.name
-    // load data
-    // loadChecklistItems()
+    // tableView.reloadData()
   }
 
   override func didReceiveMemoryWarning() {
@@ -69,6 +66,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     
     configureText(for: cell, with: item)
     configureCheckmark(for: cell, with: item)
+    configureDueDate(for: cell, with: item)
     return cell
   }
   
@@ -79,7 +77,6 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
       configureCheckmark(for: cell, with: item)
     }
     tableView.deselectRow(at: indexPath, animated: true)
-    // saveChecklistItems()
   }
   
   // swipe to delete func
@@ -88,7 +85,6 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     
     let indexPaths = [indexPath]
     tableView.deleteRows(at: indexPaths, with: .automatic)
-    // saveChecklistItems()
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -119,8 +115,19 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
   
   func configureText(for cell: UITableViewCell, with item: ChecklistItem) {
     let label = cell.viewWithTag(1000) as! UILabel
-    // label.text = item.text
     label.text = "\(item.text)"
+  }
+  
+  func configureDueDate(for cell: UITableViewCell, with item: ChecklistItem) {
+    let label = cell.viewWithTag(1002) as! UILabel
+    if item.shouldRemind {
+      let formatter = DateFormatter()
+      formatter.dateStyle = .medium
+      formatter.timeStyle = .short
+      label.text = "\(formatter.string(from: item.dueDate))"
+    } else {
+      label.text = "(No due date)"
+    }
   }
 }
 
