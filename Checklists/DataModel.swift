@@ -10,6 +10,7 @@ import Foundation
 
 class DataModel {
   var lists = [Checklist]()
+  var listItems = [ChecklistItem]() // new
   var indexOfSelectedChecklist: Int {
     get {
       return UserDefaults.standard.integer(forKey: "ChecklistIndex")
@@ -51,6 +52,7 @@ class DataModel {
       do {
         lists = try decoder.decode([Checklist].self, from: data)
         sortChecklists()
+        sortChecklistItems()
       } catch {
         print("Error decoding item array!")
       }
@@ -82,6 +84,16 @@ class DataModel {
     lists.sort(by: { checklist1, checklist2 in return checklist1.name.localizedStandardCompare(checklist2.name) == .orderedAscending})
   }
   
+  // new NOT WORKING?:
+  func sortChecklistItems() {
+    
+    listItems.sort(by: { checklistItem1, checklistItem2 in return checklistItem1.dueDate.compare(checklistItem2.dueDate) == .orderedAscending })
+    
+    // listItems.sort(by: { $0.dueDate.compare($1.dueDate) == .orderedAscending})
+    
+    // listItems.sort { $0.dueDate < $1.dueDate }
+  }
+  
   class func nextChecklistItemID() -> Int {
     let userDefaults = UserDefaults.standard
     let itemID = userDefaults.integer(forKey: "ChecklistItemID")
@@ -89,6 +101,8 @@ class DataModel {
     userDefaults.synchronize()
     return itemID
   }
+  
+
 
   
   

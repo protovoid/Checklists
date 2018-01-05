@@ -13,13 +13,24 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     navigationController?.popViewController(animated: true)
   }
   
+  
+  
   func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: ChecklistItem) {
     let newRowIndex = checklist.items.count
     checklist.items.append(item)
     
+    
+    
+    
     let indexPath = IndexPath(row: newRowIndex, section: 0)
     let indexPaths = [indexPath]
     tableView.insertRows(at: indexPaths, with: .automatic)
+    
+    // new sort by due date here:
+    dataModel.sortChecklistItems()
+    
+    tableView.reloadData()
+    
     navigationController?.popViewController(animated: true)
   }
   
@@ -31,11 +42,17 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
         configureDueDate(for: cell, with: item)
       }
     }
+    // new sort by due date here:
+    dataModel.sortChecklistItems()
+    tableView.reloadData()
+    
     navigationController?.popViewController(animated: true)
   }
   
   
   var checklist: Checklist!
+  var dataModel: DataModel!
+
   
   
 
